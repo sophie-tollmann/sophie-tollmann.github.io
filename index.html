@@ -220,32 +220,33 @@
     }
 
     /* ── LIBRARY ──────────────────────────────────── */
-    .library-grid {
+    .library-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .library-desc {
-      color: var(--muted);
-      max-width: 420px;
-      margin-bottom: 1rem;
+    .library-header .section-title { margin-bottom: 0; }
+
+    .btn-outline.small {
+      padding: 0.5rem 1.1rem;
+      font-size: 0.85rem;
+      box-shadow: 3px 3px 0 var(--ink);
     }
 
-    .library-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+    .notion-embed-wrap {
+      border: 2px solid var(--ink);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: #fff;
     }
 
-    .tag {
-      font-family: 'Caveat', cursive;
-      font-size: 1rem;
-      padding: 0.15rem 0.65rem;
-      border: 1.5px solid var(--ink);
-      color: var(--muted);
+    .notion-iframe {
+      display: block;
+      min-height: 600px;
     }
 
     /* ── EVENTS ───────────────────────────────────── */
@@ -398,35 +399,26 @@
   </div>
 </section>
 
-<!-- ── CURRENTLY ────────────────────────────────────── -->
-<section class="section" id="tinkering">
-  <span class="eyebrow">↓ what's going on</span>
-  <h2 class="section-title">Currently</h2>
-  <div class="currently-card">
-    <p>Tinkering...<br />ask me what's brewing ☕</p>
-  </div>
-</section>
-
 <!-- ── LIBRARY ───────────────────────────────────────── -->
 <section class="section" id="library">
   <span class="eyebrow">↓ what I'm reading</span>
-  <h2 class="section-title">Library</h2>
-  <div class="library-grid">
-    <div class="library-info">
-      <p class="library-desc">Books I've read, am reading, and want to read — tracked in Notion.</p>
-      <div class="library-tags">
-        <span class="tag">AI</span>
-        <span class="tag">Business</span>
-        <span class="tag">Science</span>
-        <span class="tag">Biography</span>
-        <span class="tag">Philosophy</span>
-      </div>
-    </div>
+  <div class="library-header">
+    <h2 class="section-title">Library</h2>
     <a href="https://careful-snowdrop-e29.notion.site/Sophies-Bookshelf-335a04f62dd8808782cdcc9549ca2b3d"
-       target="_blank" rel="noopener" class="btn-outline"
+       target="_blank" rel="noopener" class="btn-outline small"
        onclick="posthog.capture('click_library')">
-      Open Bookshelf →
+      Open in Notion →
     </a>
+  </div>
+  <div class="notion-embed-wrap">
+    <iframe
+      src="https://careful-snowdrop-e29.notion.site/Sophies-Bookshelf-335a04f62dd8808782cdcc9549ca2b3d"
+      width="100%"
+      height="600"
+      frameborder="0"
+      allowfullscreen
+      class="notion-iframe"
+    ></iframe>
   </div>
 </section>
 
