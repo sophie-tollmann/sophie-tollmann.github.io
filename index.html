@@ -18,7 +18,8 @@
       --bg:        #F6F3ED;
       --ink:       #1A1A1A;
       --muted:     #7A7060;
-      --highlight: #E8D9A0;
+      --highlight: #E8C4A0;
+      --accent:    #B85C38;
       --shadow:    4px 4px 0 #1A1A1A;
     }
 
@@ -218,6 +219,35 @@
       text-transform: uppercase;
     }
 
+    /* ── LIBRARY ──────────────────────────────────── */
+    .library-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .library-desc {
+      color: var(--muted);
+      max-width: 420px;
+      margin-bottom: 1rem;
+    }
+
+    .library-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: 'Caveat', cursive;
+      font-size: 1rem;
+      padding: 0.15rem 0.65rem;
+      border: 1.5px solid var(--ink);
+      color: var(--muted);
+    }
+
     /* ── EVENTS ───────────────────────────────────── */
     .events-desc {
       color: var(--muted);
@@ -289,11 +319,12 @@
     }
 
     .link-pill.filled {
-      background: var(--ink);
-      color: var(--bg);
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
     }
 
-    .link-pill.filled:hover { box-shadow: 6px 6px 0 var(--muted); }
+    .link-pill.filled:hover { box-shadow: 6px 6px 0 var(--ink); }
 
     .hi-note {
       font-family: 'Caveat', cursive;
@@ -380,21 +411,22 @@
 <section class="section" id="library">
   <span class="eyebrow">↓ what I'm reading</span>
   <h2 class="section-title">Library</h2>
-  <!--
-    To embed your Notion database:
-    1. Open your Notion page → Share → Publish to web → Copy link
-    2. Replace the placeholder div below with:
-    <iframe
-      src="https://sophietollmann.notion.site/YOUR_PAGE_ID"
-      width="100%"
-      height="600"
-      frameborder="0"
-      style="border: 2px solid #1A1A1A;"
-    ></iframe>
-  -->
-  <div class="library-placeholder">
-    <p>📚 reading list coming soon</p>
-    <small>powered by Notion</small>
+  <div class="library-grid">
+    <div class="library-info">
+      <p class="library-desc">Books I've read, am reading, and want to read — tracked in Notion.</p>
+      <div class="library-tags">
+        <span class="tag">AI</span>
+        <span class="tag">Business</span>
+        <span class="tag">Science</span>
+        <span class="tag">Biography</span>
+        <span class="tag">Philosophy</span>
+      </div>
+    </div>
+    <a href="https://careful-snowdrop-e29.notion.site/Sophies-Bookshelf-335a04f62dd8808782cdcc9549ca2b3d"
+       target="_blank" rel="noopener" class="btn-outline"
+       onclick="posthog.capture('click_library')">
+      Open Bookshelf →
+    </a>
   </div>
 </section>
 
@@ -403,7 +435,7 @@
   <span class="eyebrow">↓ things I organize</span>
   <h2 class="section-title">Events</h2>
   <p class="events-desc">I bring people together. Come hang.</p>
-  <a href="https://luma.com/user/usr-bnDf8wIuoSCefgK" target="_blank" rel="noopener" class="btn-outline">
+  <a href="https://luma.com/user/usr-bnDf8wIuoSCefgK" target="_blank" rel="noopener" class="btn-outline" onclick="posthog.capture('click_luma')">
     See all events on Luma →
   </a>
 </section>
@@ -423,14 +455,13 @@
 
     <div>
       <div class="links-stack">
-        <a href="https://www.linkedin.com/in/sophie-estella-tollmann-cdtm/" target="_blank" rel="noopener" class="link-pill filled">
+        <a href="https://www.linkedin.com/in/sophie-estella-tollmann-cdtm/" target="_blank" rel="noopener" class="link-pill filled" onclick="posthog.capture('click_linkedin')">
           Say hi →
         </a>
-        <a href="https://substack.com/@sophietollmann" target="_blank" rel="noopener" class="link-pill">
+        <a href="https://substack.com/@sophietollmann" target="_blank" rel="noopener" class="link-pill" onclick="posthog.capture('click_substack')">
           Subscribe on Substack →
         </a>
       </div>
-      <p class="hi-note">I read everything. I reply to interesting people.</p>
     </div>
 
   </div>
