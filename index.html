@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sophie Tollmann</title>
   <meta name="description" content="Sophie Tollmann — SF-based tinkerer and connector." />
+  <link rel="icon" type="image/png" href="sophie.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -360,7 +361,7 @@
   </div>
   <div class="avatar-wrap">
     <div class="avatar-frame">
-      <img src="avatar.png" alt="Sophie Tollmann" />
+      <img src="sophie.png" alt="Sophie Tollmann" />
       <div class="avatar-note">that's me ↑</div>
     </div>
   </div>
@@ -414,18 +415,16 @@
   <div class="hi-grid">
 
     <div>
-      <p>Feel free to reach out — especially curious to learn more about:</p>
+      <p>Currently learning about:</p>
       <p class="hi-topics">
-        → 0 to 1<br />
-        → Applied AI<br />
-        → Building from scratch
+        → <span id="learning-typed"></span><span class="cursor"></span>
       </p>
     </div>
 
     <div>
       <div class="links-stack">
         <a href="https://www.linkedin.com/in/sophie-estella-tollmann-cdtm/" target="_blank" rel="noopener" class="link-pill filled">
-          Connect on LinkedIn →
+          Say hi →
         </a>
         <a href="https://substack.com/@sophietollmann" target="_blank" rel="noopener" class="link-pill">
           Subscribe on Substack →
@@ -445,15 +444,10 @@
 
 <!-- ── TYPING ANIMATION ───────────────────────────────── -->
 <script>
-  (function () {
-    const phrases = [
-      "something's brewing.",
-      "connecting dots.",
-      "building 0→1.",
-      "figuring it out."
-    ];
+  function typewriter(elementId, phrases) {
     let pi = 0, ci = 0, deleting = false;
-    const el = document.getElementById("typed");
+    const el = document.getElementById(elementId);
+    if (!el) return;
 
     function tick() {
       const word = phrases[pi];
@@ -472,7 +466,20 @@
       setTimeout(tick, delay);
     }
     tick();
-  })();
+  }
+
+  typewriter("typed", [
+    "something's brewing.",
+    "connecting dots.",
+    "building 0→1.",
+    "figuring it out."
+  ]);
+
+  typewriter("learning-typed", [
+    "0 to 1",
+    "Europe & US",
+    "Applied AI"
+  ]);
 </script>
 
 <!-- ── POSTHOG ─────────────────────────────────────────── -->
