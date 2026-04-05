@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sophie Tollmann</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(a!==void 0?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return a!=="posthog"&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString()+" (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_tCZMQXtW5uX7MaEp92BuiaDHbMdJj6azi4NbdNbKyMYG', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+    });
+  </script>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       TOKENS
+    ───────────────────────────────────────────── */
+    :root {
+      --honeysuckle: #F6C8CC;
+      --taupe:       #AF8D84;
+      --olive:       #807245;
+      --celadon:     #E0E5DA;
+      --bg:          #F7F5F0;
+      --ink:         #1C1916;
+      --ink-mid:     #5A534C;
+      --ink-soft:    #9A9188;
+      --white:       #FFFFFF;
+      --card-shadow: 0 4px 24px rgba(28,25,22,.10);
+
+      /* Typography — one system, everywhere */
+      --font:        'Inter', -apple-system, sans-serif;
+      --text-xs:     11px;
+      --text-sm:     13px;
+      --text-base:   15px;
+      --text-md:     17px;
+      --text-lg:     20px;
+      --text-xl:     26px;
+      --text-2xl:    34px;
+      --text-3xl:    44px;
+      --weight-reg:  400;
+      --weight-med:  500;
+      --weight-semi: 600;
+      --weight-bold: 700;
+      --weight-xbold:800;
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font);
+      font-size: var(--text-base);
+      font-weight: var(--weight-reg);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+    /* ─────────────────────────────────────────────
+       LAYOUT SHELL
+    ───────────────────────────────────────────── */
+    .shell {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 32px 80px;
+    }
+
+    /* ─────────────────────────────────────────────
+       HEADER
+    ───────────────────────────────────────────── */
+    .header {
+      padding: 52px 0 36px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .avatar-wrap {
+      flex-shrink: 0;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--celadon);
+      background: var(--celadon);
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Placeholder shown when no image */
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--celadon);
+      color: var(--taupe);
+      font-size: 32px;
+      font-weight: var(--weight-bold);
+    }
+
+    .header-info {}
+
+    .header-name {
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-xbold);
+      letter-spacing: -.025em;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      font-size: var(--text-sm);
+      font-weight: var(--weight-reg);
+      color: var(--ink-mid);
+    }
+
+    .header-meta a {
+      color: var(--olive);
+      font-weight: var(--weight-med);
+    }
+    .header-meta a:hover { text-decoration: underline; }
+
+    .meta-dot {
+      color: var(--ink-soft);
+      pointer-events: none;
+    }
+
+    /* ─────────────────────────────────────────────
+       NAV TABS
+    ───────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 1.5px solid var(--celadon);
+      margin-bottom: 40px;
+    }
+
+    .nav-tab {
+      padding: 10px 18px;
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semi);
+      font-family: var(--font);
+      letter-spacing: .01em;
+      color: var(--ink-soft);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1.5px;
+      transition: color .15s, border-color .15s;
+      cursor: pointer;
+    }
+    .nav-tab:hover { color: var(--ink); }
+    .nav-tab.active {
+      color: var(--olive);
+      border-bottom-color: var(--olive);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTIONS
+    ───────────────────────────────────────────── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ─────────────────────────────────────────────
+       SECTION HEADINGS
+    ───────────────────────────────────────────── */
+    .section-label {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+
+    /* ─────────────────────────────────────────────
+       POLAROID CARDS  (Current Topics)
+    ───────────────────────────────────────────── */
+    .polaroid-row {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .polaroid {
+      flex: 1;
+      background: var(--white);
+      border-radius: 3px;
+      box-shadow: var(--card-shadow);
+      overflow: hidden;
+      /* Polaroid: equal thin border top+sides, thick bottom */
+      padding: 12px 12px 0 12px;
+    }
+
+    .polaroid-face {
+      /* The "photo" area */
+      border-radius: 2px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 24px;
+    }
+
+    /* ── Energy face ── */
+    .polaroid-energy .polaroid-face {
+      background: #0f0d0a;
+    }
+
+    .pf-energy-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 36px 36px;
+    }
+
+    .pf-energy-glow {
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246,200,204,.15) 0%, transparent 70%);
+    }
+
+    .pf-top { position: relative; z-index: 2; }
+    .pf-bottom { position: relative; z-index: 2; }
+
+    .pf-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .polaroid-energy .pf-eyebrow { color: rgba(246,200,204,.7); }
+    .polaroid-ai .pf-eyebrow     { color: rgba(128,114,69,.8); }
+
+    .pf-icon {
+      margin-bottom: 18px;
+    }
+
+    .pf-title {
+      font-size: 52px;
+      font-weight: var(--weight-xbold);
+      line-height: .9;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .polaroid-energy .pf-title      { color: var(--white); }
+    .polaroid-energy .pf-title span { color: var(--honeysuckle); }
+
+    .pf-desc {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-reg);
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .polaroid-energy .pf-desc { color: rgba(255,255,255,.45); }
+    .polaroid-ai .pf-desc     { color: rgba(255,255,255,.45); }
+
+    .pf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 2px;
+      transition: opacity .15s;
+    }
+    .pf-link:hover { opacity: .8; }
+
+    .polaroid-energy .pf-link {
+      border: 1px solid rgba(246,200,204,.3);
+      color: rgba(246,200,204,.85);
+    }
+
+    .pf-link-arrow {
+      font-size: 10px;
+    }
+
+    /* ── Applied AI face ── */
+    .polaroid-ai .polaroid-face {
+      background: #0f0e0a;
+    }
+
+    .pf-ai-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+
+    .pf-ai-glow {
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(128,114,69,.2) 0%, transparent 70%);
+    }
+
+    .pf-ai-rule {
+      position: absolute;
+      top: 0; bottom: 0; left: 24px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(128,114,69,.5) 30%, rgba(128,114,69,.5) 70%, transparent);
+    }
+
+    .polaroid-ai .pf-top,
+    .polaroid-ai .pf-bottom { padding-left: 18px; }
+
+    .pf-title-ai {
+      font-size: 46px;
+      font-weight: var(--weight-xbold);
+      line-height: .92;
+      letter-spacing: -.035em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .pf-title-ai em {
+      font-style: normal;
+      color: var(--celadon);
+    }
+
+    .pf-divider {
+      width: 32px; height: 2px;
+      background: var(--olive);
+      margin: 0 0 14px 18px;
+    }
+
+    .pf-ai-subtitle {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-reg);
+      line-height: 1.55;
+      color: rgba(255,255,255,.45);
+      padding-left: 18px;
+    }
+
+    /* ── Polaroid caption (the white strip) ── */
+    .polaroid-caption {
+      padding: 14px 14px 18px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .polaroid-caption-title {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semi);
+      color: var(--ink);
+      letter-spacing: .01em;
+    }
+
+    .polaroid-caption-tag {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-med);
+      color: var(--taupe);
+      letter-spacing: .05em;
+    }
+
+    /* ─────────────────────────────────────────────
+       EVENTS / TIMELINE  (shared with TLDR)
+    ───────────────────────────────────────────── */
+    .timeline { display: flex; flex-direction: column; gap: 12px; }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 20px;
+      padding: 20px 24px;
+      background: var(--white);
+      border-radius: 6px;
+      box-shadow: 0 1px 6px rgba(28,25,22,.06);
+      align-items: start;
+    }
+
+    .tl-date {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      padding-top: 3px;
+      line-height: 1.4;
+    }
+
+    .tl-body {}
+
+    .tl-title {
+      font-size: var(--text-md);
+      font-weight: var(--weight-bold);
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+    }
+
+    .tl-subtitle {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-reg);
+      color: var(--ink-mid);
+      margin-bottom: 10px;
+    }
+
+    .tl-tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tl-tag {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--celadon);
+      color: var(--olive);
+    }
+
+    .tl-tag.pink  { background: #fce8ea; color: #a05060; }
+    .tl-tag.taupe { background: #efe7e5; color: var(--taupe); }
+    .tl-tag.olive { background: #e8e4d8; color: var(--olive); }
+
+    .tl-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-top: 10px;
+    }
+    .tl-link:hover { text-decoration: underline; }
+
+    /* ─────────────────────────────────────────────
+       READS SECTION
+    ───────────────────────────────────────────── */
+    .reads-notion-banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1.5px solid var(--celadon);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 28px;
+    }
+
+    .reads-notion-icon {
+      width: 28px; height: 28px;
+      flex-shrink: 0;
+    }
+
+    .reads-notion-text {
+      font-size: var(--text-sm);
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+
+    .reads-notion-text strong { color: var(--ink); font-weight: var(--weight-semi); }
+
+    .reads-notion-text a {
+      color: var(--olive);
+      font-weight: var(--weight-semi);
+    }
+    .reads-notion-text a:hover { text-decoration: underline; }
+
+    .reads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .read-card {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 20px;
+      box-shadow: 0 1px 6px rgba(28,25,22,.06);
+    }
+
+    .read-type {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 8px;
+    }
+
+    .read-title {
+      font-size: var(--text-base);
+      font-weight: var(--weight-bold);
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .read-author {
+      font-size: var(--text-sm);
+      color: var(--ink-mid);
+      margin-bottom: 12px;
+    }
+
+    .read-rating {
+      font-size: 12px;
+      color: var(--olive);
+    }
+
+    /* ─────────────────────────────────────────────
+       THOUGHTS SECTION
+    ───────────────────────────────────────────── */
+    .thoughts-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .thought-item {
+      background: var(--white);
+      border-radius: 6px;
+      padding: 24px;
+      box-shadow: 0 1px 6px rgba(28,25,22,.06);
+    }
+
+    .thought-date {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 10px;
+    }
+
+    .thought-title {
+      font-size: var(--text-xl);
+      font-weight: var(--weight-bold);
+      letter-spacing: -.02em;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .thought-excerpt {
+      font-size: var(--text-base);
+      color: var(--ink-mid);
+      line-height: 1.6;
+    }
+
+    /* ─────────────────────────────────────────────
+       TLDR / CV SECTION
+    ───────────────────────────────────────────── */
+    .cv-intro {
+      font-size: var(--text-md);
+      font-weight: var(--weight-reg);
+      color: var(--ink-mid);
+      line-height: 1.65;
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
+
+    .cv-block { margin-bottom: 36px; }
+
+    .cv-block-label {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semi);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--celadon);
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER / SECTION LINKS
+    ───────────────────────────────────────────── */
+    .inline-nav {
+      display: inline-flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .inline-nav-link {
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semi);
+      color: var(--olive);
+      letter-spacing: .05em;
+      cursor: pointer;
+    }
+    .inline-nav-link:hover { text-decoration: underline; }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 620px) {
+      .shell { padding: 0 16px 60px; }
+      .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .polaroid-row { flex-direction: column; }
+      .tl-item { grid-template-columns: 1fr; gap: 6px; }
+      .nav-tab { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- ─── HEADER ─── -->
+  <header class="header">
+    <div class="avatar-wrap">
+      <!-- Replace assets/avatar.png with your comic illustration -->
+      <img src="assets/avatar.png" alt="Sophie Tollmann"
+           onerror="this.parentNode.innerHTML='<div class=\'avatar-placeholder\'>ST</div>'" />
+    </div>
+    <div class="header-info">
+      <h1 class="header-name">Sophie Tollmann</h1>
+      <div class="header-meta">
+        <span>Stanford, CA</span>
+        <span class="meta-dot">·</span>
+        <a href="mailto:sophie.tollmann@gmail.com">sophie.tollmann@gmail.com</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── NAV ─── -->
+  <nav class="nav" role="tablist">
+    <button class="nav-tab" data-tab="tldr">TLDR</button>
+    <button class="nav-tab active" data-tab="topics">Current Topics</button>
+    <button class="nav-tab" data-tab="reads">Reads</button>
+    <button class="nav-tab" data-tab="thoughts">Thoughts</button>
+    <button class="nav-tab" data-tab="events">Events</button>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       TAB: TLDR / CV
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="tab-tldr" role="tabpanel">
+    <p class="section-label">Who I am</p>
+
+    <p class="cv-intro">
+      Curious about where energy meets intelligence. Currently at Stanford exploring the overlap of applied AI, clean energy infrastructure, and the systems that shape how we live and work.
+    </p>
+
+    <!-- Experience -->
+    <div class="cv-block">
+      <div class="cv-block-label">Experience</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-date">2024 –<br>Present</div>
+          <div class="tl-body">
+            <div class="tl-title">Stanford University</div>
+            <div class="tl-subtitle">Researcher · Human-Computer Interaction / AI</div>
+            <div class="tl-tag-row">
+              <span class="tl-tag">Research</span>
+              <span class="tl-tag olive">Applied AI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2022 –<br>2024</div>
+          <div class="tl-body">
+            <div class="tl-title">Add your role here</div>
+            <div class="tl-subtitle">Title · Organization</div>
+            <div class="tl-tag-row">
+              <span class="tl-tag taupe">Strategy</span>
+              <span class="tl-tag pink">Innovation</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-date">2020 –<br>2022</div>
+          <div class="tl-body">
+            <div class="tl-title">Add your role here</div>
+            <div class="tl-subtitle">Title · Organization</div>
+            <div class="tl-tag-row">
+              <span class="tl-tag">Energy</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="cv-block">
+      <div class="cv-block-label">Education</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2023 –<br>Present</div>
+          <div class="tl-body">
+            <div class="tl-title">Stanford University</div>
+            <div class="tl-subtitle">Add your degree / program</div>
+            <div class="tl-tag-row"><span class="tl-tag">Stanford</span></div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">–</div>
+          <div class="tl-body">
+            <div class="tl-title">Add your university</div>
+            <div class="tl-subtitle">Add your degree</div>
+            <div class="tl-tag-row"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Also in -->
+    <div class="cv-block">
+      <div class="cv-block-label">Also find me in</div>
+      <nav class="inline-nav">
+        <span class="inline-nav-link" onclick="switchTab('topics')">Current Topics →</span>
+        <span class="inline-nav-link" onclick="switchTab('reads')">Reads →</span>
+        <span class="inline-nav-link" onclick="switchTab('thoughts')">Thoughts →</span>
+        <span class="inline-nav-link" onclick="switchTab('events')">Events →</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TAB: CURRENT TOPICS
+  ═══════════════════════════════════════════ -->
+  <section class="section active" id="tab-topics" role="tabpanel">
+    <p class="section-label">What I'm focused on</p>
+
+    <div class="polaroid-row">
+
+      <!-- ENERGY -->
+      <div class="polaroid polaroid-energy">
+        <div class="polaroid-face">
+          <div class="pf-energy-grid"></div>
+          <div class="pf-energy-glow"></div>
+
+          <div class="pf-top">
+            <div class="pf-eyebrow">Focus Area</div>
+            <!-- Lightning icon -->
+            <svg class="pf-icon" width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <path d="M20 4L6 20h12l-2 12 16-18H18L20 4z" fill="#F6C8CC" opacity=".9"/>
+            </svg>
+            <div class="pf-title">En<span>er</span><br>gy</div>
+          </div>
+
+          <div class="pf-bottom">
+            <div class="pf-desc">
+              Investing in the infrastructure and intelligence that powers the clean energy transition — from grid to generation.
+            </div>
+            <a href="https://luma.com/energy-round-table" target="_blank" rel="noopener" class="pf-link">
+              Energy Roundtable <span class="pf-link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="polaroid-caption">
+          <span class="polaroid-caption-title">Energy</span>
+          <span class="polaroid-caption-tag">Focus Area</span>
+        </div>
+      </div>
+
+      <!-- APPLIED AI -->
+      <div class="polaroid polaroid-ai">
+        <div class="polaroid-face">
+          <div class="pf-ai-dots"></div>
+          <div class="pf-ai-glow"></div>
+          <div class="pf-ai-rule"></div>
+
+          <div class="pf-top">
+            <div class="pf-eyebrow">Focus Area</div>
+            <div class="pf-title-ai">Applied<br><em>AI</em></div>
+          </div>
+
+          <div class="pf-bottom">
+            <div class="pf-divider"></div>
+            <div class="pf-ai-subtitle">
+              my current projects and way to figure out how it creates true value for the day to day
+            </div>
+          </div>
+        </div>
+        <div class="polaroid-caption">
+          <span class="polaroid-caption-title">Applied AI</span>
+          <span class="polaroid-caption-tag">Focus Area</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TAB: READS
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="tab-reads" role="tabpanel">
+    <p class="section-label">What I'm reading</p>
+
+    <div class="reads-notion-banner">
+      <!-- Notion N icon -->
+      <svg class="reads-notion-icon" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="4" fill="#F7F6F3"/>
+        <path d="M6 7.5C6 6.67 6.67 6 7.5 6h8.25l6.25 6.25V20.5c0 .83-.67 1.5-1.5 1.5H7.5C6.67 22 6 21.33 6 20.5V7.5z" fill="white" stroke="#E3E2DC" stroke-width="1"/>
+        <path d="M15.75 6v6.25H22" stroke="#E3E2DC" stroke-width="1"/>
+        <text x="9" y="18" font-size="7" font-weight="700" font-family="serif" fill="#1C1916">N</text>
+      </svg>
+      <div class="reads-notion-text">
+        <strong>This list lives in Notion.</strong> Update it directly at
+        <a href="https://www.notion.so/111c95e59f6d4328ba75cfd0702084ac" target="_blank" rel="noopener">your Reads database</a>
+        — changes show up here automatically.
+      </div>
+    </div>
+
+    <!-- Sample cards (update via Notion) -->
+    <div class="reads-grid">
+      <div class="read-card">
+        <div class="read-type">Book</div>
+        <div class="read-title">The Grid</div>
+        <div class="read-author">Gretchen Bakke</div>
+        <div class="read-rating">★★★★★</div>
+      </div>
+      <div class="read-card">
+        <div class="read-type">Article</div>
+        <div class="read-title">The Coming AI Winter</div>
+        <div class="read-author">Add source</div>
+        <div class="read-rating">★★★★</div>
+      </div>
+      <div class="read-card">
+        <div class="read-type">Book</div>
+        <div class="read-title">Add your next read</div>
+        <div class="read-author">Author</div>
+        <div class="read-rating">—</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TAB: THOUGHTS
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="tab-thoughts" role="tabpanel">
+    <p class="section-label">Things on my mind</p>
+
+    <div class="thoughts-list">
+      <div class="thought-item">
+        <div class="thought-date">Mar 2026</div>
+        <div class="thought-title">Add your first thought or essay here</div>
+        <div class="thought-excerpt">
+          A short excerpt or teaser sentence goes here. Click to read more.
+        </div>
+      </div>
+      <div class="thought-item">
+        <div class="thought-date">Feb 2026</div>
+        <div class="thought-title">What does AI actually do for energy?</div>
+        <div class="thought-excerpt">
+          Placeholder for your writing. Edit this section to add your thoughts.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TAB: EVENTS
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="tab-events" role="tabpanel">
+    <p class="section-label">Upcoming &amp; recent</p>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-date">Mar 2026</div>
+        <div class="tl-body">
+          <div class="tl-title">Energy Roundtable</div>
+          <div class="tl-subtitle">Stanford · Hosted via Luma</div>
+          <div class="tl-tag-row">
+            <span class="tl-tag">Energy</span>
+            <span class="tl-tag taupe">Roundtable</span>
+          </div>
+          <a href="https://luma.com/energy-round-table" target="_blank" rel="noopener" class="tl-link">
+            Register on Luma ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-date">TBD</div>
+        <div class="tl-body">
+          <div class="tl-title">Add your next event</div>
+          <div class="tl-subtitle">Location · Format</div>
+          <div class="tl-tag-row">
+            <span class="tl-tag pink">Talk</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /shell -->
+
+<script>
+  function switchTab(tabId) {
+    posthog.capture('tab_switched', { tab: tabId });
+    // Update buttons
+    document.querySelectorAll('.nav-tab').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabId);
+    });
+    // Update panels
+    document.querySelectorAll('.section').forEach(sec => {
+      sec.classList.toggle('active', sec.id === 'tab-' + tabId);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.querySelectorAll('.nav-tab').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+</script>
+</body>
+</html>
