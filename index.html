@@ -610,6 +610,40 @@
     .inline-nav-link:hover { text-decoration: underline; }
 
     /* ─────────────────────────────────────────────
+       GALLERY SECTION
+    ───────────────────────────────────────────── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      background: var(--celadon);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--celadon);
+      color: var(--taupe);
+      font-size: 28px;
+    }
+
+    /* ─────────────────────────────────────────────
        RESPONSIVE
     ───────────────────────────────────────────── */
     @media (max-width: 620px) {
@@ -634,7 +668,7 @@
     <div class="header-info">
       <h1 class="header-name">Sophie Tollmann</h1>
       <div class="header-meta">
-        <span>Stanford, CA</span>
+        <span>Munich</span>
         <span class="meta-dot">·</span>
         <a href="mailto:sophie.tollmann@gmail.com">sophie.tollmann@gmail.com</a>
       </div>
@@ -648,6 +682,7 @@
     <button class="nav-tab" data-tab="reads">Reads</button>
     <button class="nav-tab" data-tab="thoughts">Thoughts</button>
     <button class="nav-tab" data-tab="events">Events</button>
+    <button class="nav-tab" data-tab="gallery">Gallery</button>
   </nav>
 
   <!-- ══════════════════════════════════════════
@@ -734,6 +769,7 @@
         <span class="inline-nav-link" onclick="switchTab('reads')">Reads →</span>
         <span class="inline-nav-link" onclick="switchTab('thoughts')">Thoughts →</span>
         <span class="inline-nav-link" onclick="switchTab('events')">Events →</span>
+        <span class="inline-nav-link" onclick="switchTab('gallery')">Gallery →</span>
       </nav>
     </div>
   </section>
@@ -906,6 +942,35 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TAB: GALLERY
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="tab-gallery" role="tabpanel">
+    <p class="section-label">Best moments</p>
+
+    <!-- Drop photos into assets/gallery/ named 1.jpg … 6.jpg (or add more <div class="gallery-item"> tiles) -->
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/gallery/1.jpg" alt="Moment 1" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/2.jpg" alt="Moment 2" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/3.jpg" alt="Moment 3" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/4.jpg" alt="Moment 4" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/5.jpg" alt="Moment 5" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
+      <div class="gallery-item">
+        <img src="assets/gallery/6.jpg" alt="Moment 6" onerror="this.parentNode.innerHTML='<div class=\'gallery-placeholder\'>📷</div>'" />
+      </div>
     </div>
   </section>
 
